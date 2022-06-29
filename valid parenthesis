@@ -6,7 +6,7 @@ Open brackets must be closed by the same type of brackets.
 Open brackets must be closed in the correct order.
  
  
- 
+      //we need to check three conditions whether the stack is empty r the characters r matching r they r not matching.//
  
  
   bool isValid(string s) {
