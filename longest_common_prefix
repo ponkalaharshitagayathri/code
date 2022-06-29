@@ -10,7 +10,7 @@ Input: strs = ["flower","flow","flight"]
 Output: "fl"
 
 
-//instead of gng for equality go for unequality it will be easy.
+//instead of gng for equality go for unequality it will be easy. Sorting isn't required at all.
 
 
  string longestCommonPrefix(vector<string>& strs) {
