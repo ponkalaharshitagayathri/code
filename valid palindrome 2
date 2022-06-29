@@ -1,0 +1,59 @@
+Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+
+ 
+
+Example 1:
+
+Input: s = "aba"
+Output: true
+Example 2:
+
+Input: s = "abca"
+Output: true
+Explanation: You could delete the character 'c'.
+
+
+//sum is easy u just need to check for palindrome.if characters are not equal u just need to remove either of the start r end character and again check for palindrome.
+
+
+
+ bool util(string s,int b,int e)
+   {
+       while(b<e)
+       {
+           if(s[b]==s[e])
+           {
+               b++;
+               e--;
+           }
+           else
+           {
+               return false;
+           }
+       }
+       return true;
+   }
+    bool validPalindrome(string s) {
+      int b=0,e=s.length()-1;
+        while(b<e)
+        {
+            if(s[b]==s[e])
+            {
+                b++;
+                e--;
+            }
+            else
+            {
+                if(util(s,b+1,e) or util(s,b,e-1))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+        
+    }
