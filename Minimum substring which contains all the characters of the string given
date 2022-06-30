@@ -1,0 +1,68 @@
+Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+
+The testcases will be generated such that the answer is unique.
+
+A substring is a contiguous sequence of characters within the string.
+
+ 
+
+Example 1:
+
+Input: s = "ADOBECODEBANC", t = "ABC"
+Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+Example 2:
+
+Input: s = "a", t = "a"
+Output: "a"
+Explanation: The entire string s is the minimum window.
+
+
+ string minWindow(string s, string t) {
+        int n1=s.size();
+        int n2=t.size();
+        if(n1<n2) 
+        {
+            return "";
+        }
+        unordered_map<char,int> mp;
+        for(int i=0;i<t.size();i++)
+        {
+            mp[t[i]]++;
+        }
+        int left=0,right=0,pos=0,size=INT_MAX;
+        int count=t.size();
+        for(right=0;right<n1;right++)
+        {
+            if(mp[s[right]]>0)
+            {
+                count--;
+               
+            }
+            mp[s[right]]--;
+            while(count==0)
+            {
+                if(right-left+1<size)
+                {
+                    size=right-left+1;
+                    pos=left;
+                }
+            
+            mp[s[left]]++;
+            if(mp[s[left]]>0)
+            {
+                count++;
+            }
+            left++;
+            }
+        }
+    
+        
+        if(size==INT_MAX) 
+        {
+            return "";
+        }
+        
+        string ans=s.substr(pos,size);
+        return ans;
+    }
