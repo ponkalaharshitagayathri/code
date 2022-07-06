@@ -1,0 +1,73 @@
+A valid number can be split up into these components (in order):
+
+A decimal number or an integer.
+(Optional) An 'e' or 'E', followed by an integer.
+A decimal number can be split up into these components (in order):
+
+(Optional) A sign character (either '+' or '-').
+One of the following formats:
+One or more digits, followed by a dot '.'.
+One or more digits, followed by a dot '.', followed by one or more digits.
+A dot '.', followed by one or more digits.
+An integer can be split up into these components (in order):
+
+(Optional) A sign character (either '+' or '-').
+One or more digits.
+For example, all the following are valid numbers: ["2", "0089", "-0.1", "+3.14", "4.", "-.9", "2e10", "-90E3", "3e+7", "+6e-1", "53.5e93", "-123.456e789"], while the following are not valid numbers: ["abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53"].
+
+Given a string s, return true if s is a valid number.
+
+
+
+/*Here we will be having 4 things
+    1.number->Here we will mark digitseen as true.
+    2.when we encounter a sign we need to check whether it is at the end or r there more than 2 signs or if the sign is coming in the middle whether the previous characters are 'e' and 'E' or not.After this we will increase the plusminus.
+    3.when we encounter a character other than e we will return false.
+    4.when we encounter e or e we should check whether we already encountered e or not, is it present at the end or we didn't see any digit till then and mark eseen as true;
+    5.when we encounter a dot we should check whether it is last and no digit is seen till then or did we encounter a dot already or did we encounter an e already and ,ark dotseen as true;*/
+    
+    
+    
+     bool isNumber(string s) {
+       
+        
+        bool dotseen=false,eseen=false,digitseen=false;
+        int plusminus=0,n=s.length();
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]-'0'>=0 and s[i]-'0'<=9)
+            {
+                digitseen=true;
+            }
+            else if(s[i]=='+' or s[i]=='-')
+            {
+                if(plusminus==2 or i==n-1 or (i>0 and(s[i-1]!='e' and s[i-1]!='E')))
+                {
+                    return false;
+                }
+                plusminus++;
+            }
+            else if(s[i]=='e' or s[i]=='E')
+            {
+                if(eseen or !digitseen or i==n-1)
+                {
+                    return false;
+                }
+                eseen=true;
+            }
+            else if(s[i]=='.')
+            {
+                if(eseen or (i==n-1 and !digitseen) or dotseen)
+                {
+                    return false;
+                }
+                dotseen=true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+        
+    }
